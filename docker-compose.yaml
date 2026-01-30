@@ -1,0 +1,10 @@
+
+services:
+  copilot-cli:
+    build: .
+    image: copilot-cli:latest
+    container_name: copilot-cli
+    volumes:
+      - ./workspace:/workspace
+    stdin_open: true
+    tty: true
