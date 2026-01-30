@@ -41,3 +41,8 @@ Ce que je n'ai pas trouvé
 
 Questions pour vous
 - Voulez‑vous que j'ajoute des exemples de montage de configuration utilisateur (persist token) ?
+
+# Ressources utiles
+
+- https://github.com/github/copilot-cli
+- https://github.com/github/copilot-sdk/blob/main/docs/getting-started.md

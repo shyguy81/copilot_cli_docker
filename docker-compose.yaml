@@ -8,7 +8,11 @@ services:
       - "4321"
     ports:
       - "4321:4321"
+    environment:
+      - NODE_ENV=development
+      - GH_TOKEN=${GH_TOKEN}
     volumes:
       - ./workspace:/workspace
-    # stdin_open: true
-    # tty: true
+    stdin_open: true
+    tty: true
+    # Utiliser l'entrypoint du Dockerfile (copilot --server --port 4321)
