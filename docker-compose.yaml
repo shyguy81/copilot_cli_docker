@@ -4,7 +4,11 @@ services:
     build: .
     image: copilot-cli:latest
     container_name: copilot-cli
+    expose:
+      - "4321"
+    ports:
+      - "4321:4321"
     volumes:
       - ./workspace:/workspace
-    stdin_open: true
-    tty: true
+    # stdin_open: true
+    # tty: true
