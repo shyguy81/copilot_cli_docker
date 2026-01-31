@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: copilot-cli-ns
+  name: copilot-cli-sa
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: copilot-cli-pod
+  namespace: copilot-cli-ns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: copilot-cli-pod
+  template:
+    metadata:
+      labels:
+        app: copilot-cli-pod
+        env: copilot-cli-pod
+    spec:
+      serviceAccountName: copilot-cli-sa
+      containers:
+        - name: copilot-cli-ctr
+          image: ghcr.io/shyguy81/copilot_cli_docker:latest
+          env:
+            - name: COPILOT_CLI_SERVER_URL
+              value: "http://127.0.0.1:4321"
+          imagePullPolicy: Always
+          envFrom:
+            - secretRef:
+                name: copilot-cli-secrets
+        - name: socat-proxy
+          image: alpine/socat:latest
+          command:
+            - sh
+            - -c
+            - "socat TCP-LISTEN:8321,fork,reuseaddr,bind=0.0.0.0 TCP:127.0.0.1:4321"
+          ports:
+            - containerPort: 8321
+      imagePullSecrets:
+        - name: ghcr-secret
+
