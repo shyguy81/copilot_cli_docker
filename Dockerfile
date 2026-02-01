@@ -10,6 +10,10 @@ RUN curl -fsSL https://gh.io/copilot-install | VERSION="v0.0.400-0" bash
 # Définir le répertoire de travail
 WORKDIR /workspace
 
+LABEL org.opencontainers.image.source=https://github.com/shyguy81/copilot_cli_docker
+LABEL org.opencontainers.image.description="Docker image for Copilot CLI running in server mode"
+LABEL org.opencontainers.image.licenses=MIT
+
 # Copier le script wrapper
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
